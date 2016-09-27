@@ -1,0 +1,31 @@
+{
+   "extensionName": "Minecraft",
+   "extensionPort": 8088,
+   "host":"127.0.0.1",
+   "useHTTP": true, 
+   "blockSpecs": [
+     [" ", "Connect User %s", "connect","playerName"],
+     [" ", "box blType:%n blData:%n width:%n height:%n depth:%n", "boxCommand", 1, 0, 1, 1, 1],
+     [" ", "box0 blType:%n blData:%n width:%n height:%n depth:%n", "box0Command", 1, 0, 1, 1, 1],
+	 [" ", "prism blType:%n blData:%n width:%n depth:%n", "prism", 1, 0, 3, 1],
+	 [" ", "prism0 blType:%n blData:%n width:%n depth:%n", "prism0", 1, 0, 3, 1],
+     [" ", "cylinder blType:%n blData:%n radius:%n height:%n", "cylinder", 1, 0, 5, 1],
+	 [" ", "cylinder0 blType:%n blData:%n radius:%n height:%n", "cylinder0", 1, 0, 5, 1],	
+	 [" ", "stairs blType:%n blData:%n width:%n height:%n", "stairs", 1, 0, 1, 1],	
+	 [" ", "rainbow radius:%n", "rainbow", 12],	 
+     [" ", "bed", "bed"],
+     [" ", "torch", "torch"],
+	 [" ", "wallsign message :%s :%s :%s :%s", "wallsign", "", "", "", ""],
+	 [" ", "move drone %m.commands %n", "moveDrone", "fwd", 1],
+	 [" ", "summon %m.entities", "summon", "Chicken"],
+	 ["r", "blockType", "blockType"],
+	 ["r", "blockData", "blockData"],
+	 ["r", "result", "result"]
+   ],
+   
+   "menus":{
+		"commands": ["fwd", "back", "left", "right", "up", "down", "turn", "reset", "save_chkpt", "goto_chkpt"],
+		"entities": ["Chicken", "Cow", "Wolf", "Pig", "Sheep", "Rabbit", "Horse", "Ocelot", "Villager", "Zombie", "Skeleton", "Creeper", "Spider"]
+   }
+ 
+}
