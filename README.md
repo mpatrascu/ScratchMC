@@ -1,12 +1,12 @@
-Connecting Scratch to Minecraft using Scriptcraft and Node.js
+#Connecting Scratch to Minecraft using Scriptcraft and Node.js#
 
-__1. Needed applications__
+##1. Needed applications##
 
-__1.1 On the server side__
+###1.1 On the server side###
 
-__1.1.1 Spigot MC server__
+####1.1.1 Spigot MC server####
 
-You have to download BuildTools.jar from https://hub.spigotmc.org/jenkins/job/BuildTools/ and the to follow the instructions from https://www.spigotmc.org/wiki/buildtools/. Basically you will run this command (not double click on the downloaded file)
+You have to download __BuildTools.jar__ from https://hub.spigotmc.org/jenkins/job/BuildTools/ and the to follow the instructions from https://www.spigotmc.org/wiki/buildtools/. Basically you will run this command (not double click on the downloaded file)
 	
 	java -jar BuildTools.jar
 
@@ -14,29 +14,29 @@ and after a while you will find in the same folder __craftbukkit-1.xx.jar__ and 
 
 The next steps are described at https://www.spigotmc.org/wiki/spigot-installation/. Follow them and make sure the server works.
 
-__1.1.2 Scriptcraft__
+####1.1.2 Scriptcraft####
 
 Download scriptcraft.jar from http://scriptcraftjs.org/download/latest/ and copy it in the Minecraft server \plugins subfolder.
-Restart the server and you will see something similiar to this in the output console:
+Restart the server and you will see something similar to this in the output console:
 
 	[14:04:25 INFO]: [scriptcraft] Enabling scriptcraft v3.1.12-2015-12-30
 
 Scriptcraft will create its own folder structure under the Minecraft server main folder.
 
-__1.1.3 Node.js__
+####1.1.3 Node.js####
 
 Download the pre-built installer for your OS from https://nodejs.org/en/download/, launch it and follow the on-screen instructions.
 
-__1.2 On the client side__
-__1.2.1 Scratch 2.0 offline__
+###1.2 On the client side###
+####1.2.1 Scratch 2.0 offline####
 
 Download it from https://scratch.mit.edu/scratch2download/  (start by installing Adobe Air if it isn't already installed on your computer)
 
-__1.2.2 Minecraft client__
+####1.2.2 Minecraft client####
 
 Install the PC/Mac version from https://minecraft.net/en/download/. You must have a paid account in order to use it.
 
-__2 Making it all work together__
+##2 Making it all work together##
 
 Following the installation instructions for MC server you should have created a script or a batch file (depending on the OS) containing a line similar to this (I didn't use the other parameters):
 
@@ -69,11 +69,14 @@ _Summon_ is used to spawn the mobs from the predefined list. You can update this
 At the end of the file there are some variables updated by the Minecraft server:  _blockType_ and _blockData_ contain information about the block where the drone is, while _result_ contains the result of last executed command.
 If you want to check the values for _blockType_ and _blockData_, you should insert a delay of at least 0.2 secs (using standard Scratch block) after the last move drone instruction before using them.
 
-__3 Known issues__
+##3 Known issues##
 
 Sometimes commands are not executed in order, especially when the server is busy. It's better to avoid launching command sequences from more than one computer at the same time, although it could work.
 _move drone save_chkpt_ and _move drone goto_chkpt_ don't work yet.
 
-__4 Future developments__
+##4 Future developments##
 
 Hunting for bugs, adding new functions, showing the equivalent Javascript commands on screen.
+
+
+##Credits
