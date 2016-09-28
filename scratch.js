@@ -7,7 +7,7 @@ var utils = require('utils');
 
 var scratchReturnAddress = 'http://127.0.0.1:8089/';
     
-scratchClients=[]
+scratchClients=[];
 
 function scratch(command,ip){
 	var players = utils.players();	
@@ -60,17 +60,17 @@ function scratch(command,ip){
 		return
 		}
 	console.log("command received -" + cmd[0]+";");
-    switch(cmd[0]){    	
-     	case 'boxCommand':   
-     	case 'box':	
+	    switch(cmd[0]){    	
+		case 'boxCommand':   
+		case 'box':	
      			if(cmd[1]==64){
-					drona.door(cmd[1]);
-						}
-				else
+				drona.door(cmd[1]);
+				}
+			else
     				drona.box(''+cmd[1]+':'+parseInt(cmd[2]),parseInt(cmd[3]),parseInt(cmd[4]),parseInt(cmd[5]));    			
     		break;
-    	case 'box0':
-    	case 'box0Command':   			
+		case 'box0':
+		case 'box0Command':   			
     			drona.box0(''+cmd[1]+':'+parseInt(cmd[2]),parseInt(cmd[3]),parseInt(cmd[4]),parseInt(cmd[5]));  			
     		break;
 			
@@ -101,7 +101,7 @@ function scratch(command,ip){
     		break;
 
 		case 'stairs':
-    			drona.stairs(''+cmd[1]+':'+parseInt(cmd[2]),parseInt(cmd[3]),parseInt(cmd[4]));  			
+    			drona.stairs(parseInt(cmd[1]),parseInt(cmd[3]),parseInt(cmd[4]));  			
     		break;			
 
 		case 'wallsign':
@@ -111,13 +111,13 @@ function scratch(command,ip){
     		drona.wallsign(textArray);  			
     		break;	
 			
-    	case 'summon':   //summons mobs using Scriptcraft predefined drone's summon method
+    		case 'summon':   //summons mobs using Scriptcraft predefined drone's summon method
     		console.log("summon "+cmd[1]);
 			drona.spawn(cmd[1]) ;   		
     		break ;
 			
     		
-    	case 'moveDrone':
+    		case 'moveDrone':
 			console.log("before moveDrone: " + parseInt(10*drona.x)/10 + ":" + parseInt(10*drona.y)/10 + ":" + parseInt(10*drona.z)/10);
 			switch(cmd[1]){	
 				case 'reset':
@@ -146,14 +146,14 @@ function scratch(command,ip){
 					drona.turn(parseInt(cmd[2])); 
 					break;
 				case 'save_chkpt':
-					drona.chkpt(parseInt(cmd[2])); 
+					drona.chkpt(cmd[2]); 
 					break;
 				case 'goto_chkpt':
-					drona.move(parseInt(cmd[2])); 
+					drona.move(cmd[2]); 
 					break;
     			}
 			//console.log("after moveDrone: " + parseInt(100*drona.x)/100 + ":" + parseInt(100*drona.y)/100 + ":" + parseInt(100*drona.z)/100);    		
-    	bl=drona.getBlock();
+    		bl=drona.getBlock();
 		scratchReturn(bl.typeId, bl.data, 'ok', ip); //updates values for current block to be read by Scratch
 		break;
     }   
