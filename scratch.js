@@ -4,6 +4,7 @@ var foreach = require('utils').foreach
 var JavaString = java.lang.String;
 var http = require('http');
 var utils = require('utils');
+var sounds = require('sounds');
 
 var scratchReturnAddress = 'http://127.0.0.1:8089/';
     
@@ -112,11 +113,15 @@ function scratch(command,ip){
     		break;	
 			
     		case 'summon':   //summons mobs using Scriptcraft predefined drone's summon method
-    		console.log("summon "+cmd[1]);
+    			console.log("summon "+cmd[1]);
 			drona.spawn(cmd[1]) ;   		
     		break ;
 			
-    		
+    		case 'sound':   //plays randonmly one of the basic sounds of the specified entity on each connected player MC session
+    			utils.foreach( players, function( player ) { 
+				sounds['entity' + cmd[1] + 'Ambient']( player ); // spigot 1.10
+			} ); 		
+    		break ;
     		case 'moveDrone':
 			console.log("before moveDrone: " + parseInt(10*drona.x)/10 + ":" + parseInt(10*drona.y)/10 + ":" + parseInt(10*drona.z)/10);
 			switch(cmd[1]){	
