@@ -108,8 +108,8 @@ function scratch(command,ip){
 		case 'wallsign':
 			textArray=[];
 			for (i=1; i<5; i++)
-				textArray.push(cmd[i]);
-    		drona.wallsign(textArray);  			
+				textArray.push(decodeURIComponent(cmd[i]));
+    			drona.wallsign(textArray);  			
     		break;	
 			
     		case 'summon':   //summons mobs using Scriptcraft predefined drone's summon method
