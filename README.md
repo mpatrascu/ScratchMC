@@ -1,5 +1,5 @@
 #Connecting Scratch to Minecraft using Scriptcraft and Node.js#
-[![ScratchMC](http://imgur.com/BPJ4CVP)](https://www.youtube.com/watch?v=VoJbqqw680c)
+[![ScratchMC](http://i.imgur.com/xBu7vIZ.png)](https://www.youtube.com/watch?v=VoJbqqw680c)
 
 ##1. Needed applications##
 
