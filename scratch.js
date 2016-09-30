@@ -5,6 +5,7 @@ var JavaString = java.lang.String;
 var http = require('http');
 var utils = require('utils');
 var sounds = require('sounds');
+var teleport = require('teleport');
 
 var scratchReturnAddress = 'http://127.0.0.1:8089/';
     
@@ -122,6 +123,19 @@ function scratch(command,ip){
 				sounds['entity' + cmd[1] + 'Ambient']( player ); // spigot 1.10
 			} ); 		
     		break ;
+			    
+		case 'teleport': //teleports specified player to new coordinates
+			utils.foreach( players, function( player ) { 
+				if (player.name.toLowerCase() == cmd[1].toLowerCase()){
+					newlocation = player.location;
+					newlocation.x = parseInt(cmd[2]);
+					newlocation.y = parseInt(cmd[3]);
+					newlocation.z = parseInt(cmd[4]);
+					teleport (player, newlocation);
+				}
+			} );
+		break;
+			    
     		case 'moveDrone':
 			console.log("before moveDrone: " + parseInt(10*drona.x)/10 + ":" + parseInt(10*drona.y)/10 + ":" + parseInt(10*drona.z)/10);
 			switch(cmd[1]){	
