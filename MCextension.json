@@ -5,6 +5,7 @@
 "useHTTP": true, 
 "blockSpecs": [
 	[" ", "Connect User %s", "connect","playerName"],
+	[" ", "Teleport %s x: %n y: %n z: %n", "teleport","playerName", 0, 70, 0],
 	[" ", "box blType:%n blData:%n width:%n height:%n depth:%n", "boxCommand", 1, 0, 1, 1, 1],
 	[" ", "box0 blType:%n blData:%n width:%n height:%n depth:%n", "box0Command", 1, 0, 1, 1, 1],
 	[" ", "prism blType:%n blData:%n width:%n depth:%n", "prism", 1, 0, 3, 1],
