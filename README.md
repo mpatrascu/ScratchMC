@@ -1,6 +1,8 @@
 #Connecting Scratch to Minecraft using Scriptcraft and Node.js#
 [![ScratchMC](http://i.imgur.com/xBu7vIZ.png)](https://www.youtube.com/watch?v=VoJbqqw680c)
 
+You can read about the project at https://kidslovetocode.wordpress.com/2016/09/27/using-scratch-with-minecraft-scriptcraft-step-by-step-instructions/ or you can follow the instructions below to try it yourselves.
+
 ##1. Needed applications##
 
 ###1.1 On the server side###
