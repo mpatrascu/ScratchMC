@@ -75,7 +75,7 @@ If you want to check the values for _blockType_ and _blockData_, you should inse
 ##3 Known issues##
 
 Sometimes commands are not executed in order, especially when the server is busy. It's better to avoid launching command sequences from more than one computer at the same time, although it could work.
-_move drone save_chkpt_ and _move drone goto_chkpt_ don't work yet.
+
 
 ##4 Future developments##
 
@@ -90,5 +90,20 @@ Hunting for bugs, adding new functions, showing the equivalent Javascript comman
 [Kevin Whinnery] (https://www.twilio.com/blog/author/kevinwhinnery) for explaining (https://www.twilio.com/blog/2014/11/child-processes-streams-minecraft-multiplayer-server-nodejs.html) how to use Node.js to transfer commands received thru http to Minecraft server process
 
 The creators of all other applications used - Minecraft, Scratch and Node.js
+
+
+##6 Updates##
+
+-drone created at target block position
+
+-added ‘marker‘ block - useful to show drone position/orientation
+
+-sounds can play for one or all players
+
+-added MC time and weather commands
+
+-turn command sets orientation of player (can track the drone)
+
+-sends to Scratch positions of player and drone
 
 
