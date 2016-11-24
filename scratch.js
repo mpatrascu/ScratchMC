@@ -7,19 +7,33 @@ var utils = require('utils');
 var sounds = require('sounds');
 var teleport = require('teleport');
 
+var bkItemStack = Packages.org.bukkit.inventory.ItemStack;
+var glowEffect = org.bukkit.potion.PotionEffectType.GLOWING.createEffect(40, 10);
+
 var scratchReturnAddress = 'http://127.0.0.1:8089/'; 
 
 http.request( scratchReturnAddress + 'init', function(responseCode, responseBody){
 	console.log( responseBody );});
     
-scratchClients=[];
+var scratchClients=[];
 
 
 function scratch(command, ip){
 	var players = utils.players();	
     var cmd = command.split("/");
     var index = -1;	
-	var drona ;
+    var textArray = [];
+	var drona,
+		droneLocation,
+		player,
+		targetPlayer,
+		ghost,
+		ghostLocation,
+		currentBlock,
+		skull,
+		skullDir,
+		newLocation,
+		dx, dy, dz, dh;
 
 	for(i = 0; i < scratchClients.length; i++){
 		if (scratchClients[i].ip == ip){
@@ -27,6 +41,7 @@ function scratch(command, ip){
 			index = i;
 			drona = scratchClients[i].drone;
 			targetPlayer = scratchClients[i].targetPlayer;
+			ghost = scratchClients[i].ghost;
 			}
 		}
 	
@@ -43,8 +58,26 @@ function scratch(command, ip){
     			else{
     				drona = new Drone (targetPlayer.location);
     				}
+    			
+    			if (index != -1){
+    				scratchClients[index].ghost.remove();
+    				}
+    			
+    			ghostLocation = drona.getBlock().location;
+    			ghostLocation.setX(ghostLocation.getX() + 0.5);
+    			ghostLocation.setZ(ghostLocation.getZ() + 0.5);
+				ghost = ghostLocation.world.spawnEntity(ghostLocation, org.bukkit.entity.EntityType.ARMOR_STAND);
+				
+				ghost.setSmall(true);
+				ghost.setBasePlate(false);
+				ghost.setInvulnerable(true);
+				ghost.setVisible(false);
+				ghost.setGravity(false);
+				ghost.setArms(true);
+				ghost.addPotionEffect(glowEffect);
+				
     			if (index == -1){ //new player
-    				scratchClients.push({playerName: playerName, targetPlayer: targetPlayer, drone: drona, ip: ip});
+    				scratchClients.push({playerName: playerName, targetPlayer: targetPlayer, drone: drona, ip: ip, ghost: ghost});
     				scratchUpdatePlayer(targetPlayer, ip);
     				index = scratchClients.length - 1;
     				targetPlayer.sendTitle("Scratch","connected to " + ip);
@@ -53,6 +86,7 @@ function scratch(command, ip){
     				scratchClients[index].playerName = playerName;
     				scratchClients[index].targetPlayer = targetPlayer;
     				scratchClients[index].drone = drona;
+    				scratchClients[index].ghost = ghost;
     				}
     			}
     			   
@@ -62,8 +96,8 @@ function scratch(command, ip){
 				return;
 				}	
 			else { //return to Scratch current block
-				bl = drona.getBlock();
-				scratchReturn(bl, 'connected', ip); //updates values for current block to be read by Scratch 	
+				currentBlock = drona.getBlock();
+				scratchReturn(currentBlock, 'connected', ip); //updates values for current block to be read by Scratch 	
 				}
     		}    			
 		
@@ -98,17 +132,17 @@ function scratch(command, ip){
 					break;
 
 				case 'stairs':
-					drona.stairs(parseInt(cmd[2]), parseInt(cmd[4]), parseInt(cmd[5]));  			
+					drona.stairs(parseInt(cmd[2]));  			
 					break;			
 
 				case 'signpost':
 				case 'wallsign':
-					textArray = [];
-					for (i = 2; i < 6; i++)
+					for (i = 2; i < 6; i++){
 						textArray.push(decodeURIComponent(cmd[i]));
+						}
 					drona[cmd[1]](textArray);  			
 					break;	
-				case 'marker':
+				case 'marker': //skeleton skull having the same orientation as the drone
 					switch(drona.dir){
 						case 0: //east
 							skullDir = 5; //?
@@ -124,12 +158,18 @@ function scratch(command, ip){
 							break;	
 						}
 					drona.box("144:" + skullDir);
+					skull = drona.getBlock().getState();
+					console.log(skull.toString());
+					skull.setSkullType(org.bukkit.SkullType.CREEPER);
 					console.log(drona.dir);
 					break;
 				}
     		break;	
-    		
-    		
+    	/*	
+    	case 'chickentype': //needs a separate .js file
+    		drona.chickentype(decodeURIComponent(cmd[1]).replace(/\//g, '\n'), cmd[2], cmd.slice(3), targetPlayer);
+    		break;
+    	*/		
 		case 'summon':   //summons mobs using Scriptcraft predefined drone's summon method
 			drona.spawn(cmd[1]) ;   		
 			break ;	
@@ -190,15 +230,22 @@ function scratch(command, ip){
 			utils.foreach( players, function( player ) { 
 				if (player.name.toLowerCase() == cmd[1].toLowerCase()){
 					newlocation = player.location;
-					if(cmd[2] == 'to'){ //absolute coordinates
-						newlocation.x = parseFloat(cmd[3]);
-						newlocation.y = parseFloat(cmd[4]);
-						newlocation.z = parseFloat(cmd[5]);
-					}
-					else{ //relative coordinates
-						newlocation.x += parseFloat(cmd[3]);
-						newlocation.y += parseFloat(cmd[4]);
-						newlocation.z += parseFloat(cmd[5]);
+					switch(cmd[2]){
+						case 'at': //absolute coordinates
+							newlocation.x = parseFloat(cmd[3]);
+							newlocation.y = parseFloat(cmd[4]);
+							newlocation.z = parseFloat(cmd[5]);
+						break;
+						case 'offset': //relative coordinates
+							newlocation.x += parseFloat(cmd[3]);
+							newlocation.y += parseFloat(cmd[4]);
+							newlocation.z += parseFloat(cmd[5]);
+						break;
+						case 'to_drone': //move to drone
+							newlocation.x = drona.getBlock().getX();
+							newlocation.y = drona.getBlock().getY();
+							newlocation.z = drona.getBlock().getZ();
+						break;
 					}
 					teleport (player, newlocation);
 				}
@@ -213,19 +260,25 @@ function scratch(command, ip){
 					console.log("initial yaw: " + newlocation.getYaw());
 					
 					switch(cmd[2]){
-						case 'to_direction': //direction set to cmd[3] value
+						case 'horizontal_to': //direction set to cmd[3] value
 							newlocation.setYaw(parseInt(cmd[3]));
 							break
-						case 'by': //player will turn by cmd[3] degrees
+						case 'horizontal_by': //player will turn by cmd[3] degrees
 							newlocation.setYaw(newlocation.getYaw() + parseInt(cmd[3]));
 							break;
+						case 'vertical_to': //direction set to cmd[3] value
+							newlocation.setPitch(parseInt(cmd[3]));
+							break
+						case 'vertical_by': //player will turn by cmd[3] degrees
+							newlocation.setPitch(newlocation.getPitch() + parseInt(cmd[3]));
+							break;	
 						case 'to_point': //player will look at specified point
 							dx = newlocation.x - parseFloat(cmd[3]);
 							dy = newlocation.y + 1 - parseFloat(cmd[4]);
 							dz = newlocation.z - parseFloat(cmd[5]);
 							dh = Math.sqrt(dx * dx + dz * dz);
 							newlocation.setYaw(Math.atan2(-dx, dz) * 180 / Math.PI - 180);
-							newlocation.setPitch(- Math.atan2(-dy, dh) * 180 / Math.PI - 180);
+							newlocation.setPitch(- Math.atan2(-dy, dh) * 180 / Math.PI);
 							break;
 						case 'to_drone': //player will look at the drone position
 							dx = newlocation.x - drona.getBlock().getX() - 0.5;
@@ -270,7 +323,14 @@ function scratch(command, ip){
 					drona.move(cmd[2]); 
 					break;
     			}		
+    		
 			currentBlock = drona.getBlock();
+			ghostLocation = currentBlock.location;
+			ghostLocation.setX(currentBlock.location.getX() + 0.5);
+    		ghostLocation.setZ(currentBlock.location.getZ() + 0.5);
+    		ghostLocation.setY(currentBlock.location.getY());
+			ghost.teleport(ghostLocation);
+			ghost.addPotionEffect(glowEffect);
 			scratchReturn(currentBlock, 'ok', ip); //updates values for current block to be read by Scratch
 			break;
 
