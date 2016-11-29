@@ -106,4 +106,10 @@ The creators of all other applications used - Minecraft, Scratch and Node.js
 
 -sends to Scratch positions of player and drone
 
+-made the drone visible
 
+
+##7 Examples##
+
+Transfer Pixel art from Scratch to Minecraft world (you can find the project in Scratch-Examples)
+[![ScratchMC](http://i.imgur.com/V7vc4JC.png)](https://www.youtube.com/watch?v=CeczBoxDauQ)
