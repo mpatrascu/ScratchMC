@@ -18,6 +18,14 @@ function log(data) {
 minecraftServerProcess.stdout.on('data', log);
 minecraftServerProcess.stderr.on('data', log);
 
+//redirect keyboard input to Minecraft server
+var stdin = process.openStdin();
+stdin.on('data', function(command) {
+    if (command !== null) {
+        minecraftServerProcess.stdin.write(command + '\n');
+    }
+    else console.log("no command");
+});
 
 var http = require("http");
 
