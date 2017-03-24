@@ -17,7 +17,7 @@ and after a while you will find in the same folder __craftbukkit-1.xx.jar__ and 
 
 The next steps are described at https://www.spigotmc.org/wiki/spigot-installation/. Follow them and make sure the server works.
 
-#### 1.1.2 Scriptcraft####
+#### 1.1.2 Scriptcraft ####
 
 Download scriptcraft.jar from http://scriptcraftjs.org/download/latest/ and copy it in the Minecraft server \plugins subfolder.
 Restart the server and you will see something similar to this in the output console:
@@ -26,20 +26,20 @@ Restart the server and you will see something similar to this in the output cons
 
 Scriptcraft will create its own folder structure under the Minecraft server main folder.
 
-#### 1.1.3 Node.js####
+#### 1.1.3 Node.js ####
 
 Download the pre-built installer for your OS from https://nodejs.org/en/download/, launch it and follow the on-screen instructions.
 
-### 1.2 On the client side###
-#### 1.2.1 Scratch 2.0 offline####
+### 1.2 On the client side ###
+#### 1.2.1 Scratch 2.0 offline ####
 
 Download it from https://scratch.mit.edu/scratch2download/  (start by installing Adobe Air if it isn't already installed on your computer)
 
-#### 1.2.2 Minecraft client####
+#### 1.2.2 Minecraft client ####
 
 Install the PC/Mac version from https://minecraft.net/en/download/. You must have a paid account in order to use it.
 
-## 2 Making it work together##
+## 2 Making it work together ##
 
 Following the installation instructions for MC server you should have created a script or a batch file (depending on the OS) containing a line similar to this (I didn't use the other parameters):
 
@@ -72,17 +72,17 @@ _Summon_ is used to spawn the mobs from the predefined list. You can update this
 At the end of the file there are some variables updated by the Minecraft server:  _blockType_ and _blockData_ contain information about the block where the drone is, while _result_ contains the result of last executed command.
 If you want to check the values for _blockType_ and _blockData_, you should insert a delay of at least 0.2 secs (using standard Scratch block) after the last move drone instruction before using them.
 
-## 3 Known issues##
+## 3 Known issues ##
 
 Sometimes commands are not executed in order, especially when the server is busy. It's better to avoid launching command sequences from more than one computer at the same time, although it could work.
 
 
-## 4 Future developments##
+## 4 Future developments ##
 
 Hunting for bugs, adding new functions, showing the equivalent Javascript commands on screen.
 
 
-## 5 Credits##
+## 5 Credits ##
 [Walter Higgins] (https://twitter.com/walter) for creating [Scripcraft] (http://scriptcraftjs.org/), a very powerful tool for Minecraft modding and also for learning Javascript
 
 [Dave Locke] (https://davejlocke.wordpress.com/) for the nice [explanation] (https://davejlocke.wordpress.com/2013/10/14/14/) of Scratch 2.0 extensions and the initial idea of using MQTT
@@ -92,7 +92,7 @@ Hunting for bugs, adding new functions, showing the equivalent Javascript comman
 The creators of all other applications used - Minecraft, Scratch and Node.js
 
 
-## 6 Updates##
+## 6 Updates ##
 
 -drone created at target block position
 
@@ -109,7 +109,7 @@ The creators of all other applications used - Minecraft, Scratch and Node.js
 -made the drone visible
 
 
-## 7 Examples##
+## 7 Examples ##
 
 Transfer Pixel art from Scratch to Minecraft world (you can find the project in Scratch-Examples)
 [![ScratchMC](http://i.imgur.com/V7vc4JC.png)](https://www.youtube.com/watch?v=CeczBoxDauQ)
