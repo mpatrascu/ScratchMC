@@ -83,11 +83,11 @@ Hunting for bugs, adding new functions, showing the equivalent Javascript comman
 
 
 ## 5 Credits ##
-[Walter Higgins] (https://twitter.com/walter) for creating [Scripcraft] (http://scriptcraftjs.org/), a very powerful tool for Minecraft modding and also for learning Javascript
+[Walter Higgins](https://twitter.com/walter) for creating [Scripcraft](http://scriptcraftjs.org/), a very powerful tool for Minecraft modding and also for learning Javascript
 
-[Dave Locke] (https://davejlocke.wordpress.com/) for the nice [explanation] (https://davejlocke.wordpress.com/2013/10/14/14/) of Scratch 2.0 extensions and the initial idea of using MQTT
+[Dave Locke](https://davejlocke.wordpress.com/) for the nice [explanation](https://davejlocke.wordpress.com/2013/10/14/14/) of Scratch 2.0 extensions and the initial idea of using MQTT
 
-[Kevin Whinnery] (https://www.twilio.com/blog/author/kevinwhinnery) for explaining (https://www.twilio.com/blog/2014/11/child-processes-streams-minecraft-multiplayer-server-nodejs.html) how to use Node.js to transfer commands received thru http to Minecraft server process
+[Kevin Whinnery](https://www.twilio.com/blog/author/kevinwhinnery) for explaining (https://www.twilio.com/blog/2014/11/child-processes-streams-minecraft-multiplayer-server-nodejs.html) how to use Node.js to transfer commands received thru http to Minecraft server process
 
 The creators of all other applications used - Minecraft, Scratch and Node.js
 
